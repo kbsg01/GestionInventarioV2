@@ -1,10 +1,12 @@
-# Semana 4 Formativa: GestionInventarioJava
+# Semana 5 Formativa: GestionInventarioJavaV2
 
 ## Descripción del Proyecto
+
 Este proyecto es una aplicación de consola en Java que permite gestionar el inventario de una tienda.
 Permite agregar, eliminar, actualizar y listar productos en el inventario.
 
 ## Requisitos
+
 | Funcionales                                                                                                                                                                | No funcionales                                                                             |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
 | Agregar/eliminar productos del inventario                                                                                                                                  | Menú claro, mensajes de error descriptivos                                                 |
@@ -19,6 +21,7 @@ Permite agregar, eliminar, actualizar y listar productos en el inventario.
 ## Estructura del Proyecto
 
 El proyecto está organizado en las siguientes clases:
+
 - src:
   - main:
     - java:
@@ -28,13 +31,13 @@ El proyecto está organizado en las siguientes clases:
         - `Categoria`: Enum para las categorías de productos.
 
       - view:
-          - `IView`: 
-          - `MenuPrincipalView` implementa `IView`: Vista para el menú principal.
-          - `ProductoView` implementa `IView`: Vista específica para productos.
-          - `InventarioView` implementa `IView`: Vista específica para el inventario.
+        - `IView`:
+        - `MenuPrincipalView` implementa `IView`: Vista para el menú principal.
+        - `ProductoView` implementa `IView`: Vista específica para productos.
+        - `InventarioView` implementa `IView`: Vista específica para el inventario.
 
       - controller:
-          - `IController`: Interfaz para el controlador.
+        - `IController`: Interfaz para el controlador.
 
       - demo:
         - `GestionInventario`: Clase principal que inicia la aplicación.
@@ -47,7 +50,9 @@ El proyecto está organizado en las siguientes clases:
         - `InventarioTest`: Pruebas unitarias para la clase `Inventario`.
 
 ## Ejecución del Proyecto
+
 Para ejecutar el proyecto, sigue estos pasos:
+
 1. Clonar el repositorio:
 2. Navegar al directorio del proyecto
 3. Compilar el proyecto usando un IDE como IntelliJ IDEA o NetBeans, o desde la línea de comandos con `javac`.
@@ -55,7 +60,9 @@ Para ejecutar el proyecto, sigue estos pasos:
 5. Seguir las instrucciones en la consola para gestionar el inventario.
 
 ## Pruebas de integración y unitarias
+
 El proyecto incluye pruebas de integración y unitarias para asegurar la funcionalidad correcta de las clases principales
 implementadas con JUnit.
+
 - Las pruebas unitarias se encuentran en la carpeta `test/unitarias` y cubren métodos individuales de las clases `Producto` e `Inventario`.
 - Las pruebas de integración se encuentran en la carpeta `test/integracion` y verifican la interacción entre las clases `Producto` e `Inventario`.
