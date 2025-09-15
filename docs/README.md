@@ -35,7 +35,6 @@ El proyecto está organizado en las siguientes clases:
         - `MenuPrincipal`: Gestiona la manipulación del inventario en base a uso de usuario.
 
       - view:
-        - `IView`:
         - `MenuPrincipalView`: Vista para el menú principal.
         - `ProductoView`: Vista específica para productos.
         - `InventarioView`: Vista específica para el inventario.
