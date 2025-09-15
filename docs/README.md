@@ -9,10 +9,12 @@ Permite agregar, eliminar, actualizar y listar productos en el inventario.
 
 - Link Miro: [Roadmap Gestión Inventario en Java](https://miro.com/app/board/uXjVJIIgWos=/?share_link_id=56281502077 )
 - Link Trello: [Trello Gestión Inventario en Java](https://trello.com/b/KFmbDkwP)
+- [Requisitos funcionales/no funcionales entrega anterior](<Requerimientos Funcionales V1.md>)
+- Diagrama de clases:![Diagrama de clases UML](GestionInventarioV2.drawio.svg)
 
 ## Rquerimientos del proyecto
 
-| Requisitos funcionales                                                                                                                                                                              | Requisitos no funcionales                                                                                                                                                              |
+| Requisitos afuncionales                                                                                                                                                                              | Requisitos no funcionales                                                                                                                                                              |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **RF1.** Modelar las entidades **Producto** e **Inventario** con atributos mínimos (`codigo`, `nombre`, `precio`, `stock`, `descripción`) y operaciones para **agregar, actualizar, eliminar, buscar y listar**. | **RNF1.** **Usabilidad en CLI**: menú claro, opciones numeradas, confirmaciones y mensajes de error **descriptivos**.                                                                            |
 | **RF2.** **Buscar** producto por **ID**, por **nombre (parcial)** y por **descripción**.                                                                                                                     | **RFN2.** **Código limpio y documentado**: uso de **Javadoc** en clases y métodos clave, y un **README** con instrucciones de ejecución.                                                         |
@@ -30,16 +32,16 @@ El proyecto está organizado en las siguientes clases:
       - model:
         - `Producto`: Representa un producto en el inventario.
         - `Inventario`: Gestiona la lista de productos y las operaciones sobre ellos.
-        - `Categoria`: Enum para las categorías de productos.
+        - `MenuPrincipal`: Gestiona la manipulación del inventario en base a uso de usuario.
 
       - view:
         - `IView`:
-        - `MenuPrincipalView` implementa `IView`: Vista para el menú principal.
-        - `ProductoView` implementa `IView`: Vista específica para productos.
-        - `InventarioView` implementa `IView`: Vista específica para el inventario.
+        - `MenuPrincipalView`: Vista para el menú principal.
+        - `ProductoView`: Vista específica para productos.
+        - `InventarioView`: Vista específica para el inventario.
 
       - controller:
-        - `IController`: Interfaz para el controlador.
+        - `MenuPrincipalController`: Controlador de menú principal, encargado de gestionar la interacción del usuario con las vistas.
 
       - demo:
         - `GestionInventario`: Clase principal que inicia la aplicación.
