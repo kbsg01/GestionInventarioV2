@@ -14,7 +14,7 @@ public class GestionInventario {
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         MenuPrincipalView menuView = new MenuPrincipalView(menuPrincipal);
         ProductoView productoView = new ProductoView();
-        Inventario inventario = new Inventario();
+        Inventario inventario = menuPrincipal.getInventario();
         
         //Stack de datos de prueba
         inventario.addProducto(new Producto("P001", "Laptop HP", "Portátil para oficina", 429990.0, 10));
