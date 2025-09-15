@@ -37,7 +37,6 @@ El proyecto está organizado en las siguientes clases:
       - view:
         - `MenuPrincipalView`: Vista para el menú principal.
         - `ProductoView`: Vista específica para productos.
-        - `InventarioView`: Vista específica para el inventario.
 
       - controller:
         - `MenuPrincipalController`: Controlador de menú principal, encargado de gestionar la interacción del usuario con las vistas.
