@@ -7,14 +7,16 @@ Permite agregar, eliminar, actualizar y listar productos en el inventario.
 
 ### Recursos adicionales
 
-- Link Miro: [Roadmap - Gestión Inventario en Java](https://miro.com/app/board/uXjVJIIgWos=/?share_link_id=56281502077 )
+- Link Miro:
+  - [Roadmap - Gestión Inventario en Java alt1](https://miro.com/welcomeonboard/V3dPd3VwcDFveE4rVzNMZm1zODIvalRZb0dVVVBaMTE2cVZSMkxBY2hnVWthU3NSbHZMR1NBSGtremJ5VjZtTzY2cDZVZGJFNUdLR2RBeUd5cDd1NlhuZDZZRWJVYjN3WDJESXhsNmxnSGJCVHRLb1ZBQUxYRm5peTFjR1N0VWRBd044SHFHaVlWYWk0d3NxeHNmeG9BPT0hdjE=?share_link_id=634671075036)
+  - [Roadmap - Gestión Inventario en Java alt2](https://miro.com/app/board/uXjVJIIgWos=/?share_link_id=677630185176)
 - Link Trello: [Tablero - Gestión Inventario en Java](https://trello.com/b/KFmbDkwP)
 - [Requisitos funcionales/no funcionales entrega anterior](<Requerimientos Funcionales V1.md>)
-- Diagrama de clases:![Diagrama de clases UML](GestionInventarioV2.drawio.svg)
+- Diagrama de clases simple:![Diagrama de clases UML](GestionInventarioV2.drawio.svg)
 
 ## Rquerimientos del proyecto
 
-| Requisitos afuncionales                                                                                                                                                                              | Requisitos no funcionales                                                                                                                                                              |
+| Requisitos funcionales                                                                                                                                                                              | Requisitos no funcionales                                                                                                                                                              |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **RF1.** Modelar las entidades **Producto** e **Inventario** con atributos mínimos (`codigo`, `nombre`, `precio`, `stock`, `descripción`) y operaciones para **agregar, actualizar, eliminar, buscar y listar**. | **RNF1.** **Usabilidad en CLI**: menú claro, opciones numeradas, confirmaciones y mensajes de error **descriptivos**.                                                                            |
 | **RF2.** **Buscar** producto por **ID**, por **nombre (parcial)** y por **descripción**.                                                                                                                     | **RFN2.** **Código limpio y documentado**: uso de **Javadoc** en clases y métodos clave, y un **README** con instrucciones de ejecución.                                                         |
