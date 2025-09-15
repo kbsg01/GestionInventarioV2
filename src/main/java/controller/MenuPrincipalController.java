@@ -107,29 +107,25 @@ public class MenuPrincipalController {
             case 1 -> {
                 input = menuView.getInput("Ingrese el código a buscar: ");
                 Producto producto = menuPrincipal.buscarPorId(input);
-                if (producto == null) {
-                    menuView.displayMessage("No se encontró el producto con ese código.");
-                } else {
-                    menuView.displayMessage(producto.fullDescription());
-                }
+                menuView.displayMessage(producto.fullDescription());
             }
             case 2 -> {
                 input = menuView.getInput("Ingrese el nombre (o parte) a buscar: ");
-                resultados = menuPrincipal.buscarPorNombre(input);
-                if (resultados.isEmpty()) {
-                    menuView.displayMessage("No se encontraron productos con ese nombre.");
-                } else {
-                    resultados.forEach(p -> menuView.displayMessage(p.fullDescription()));
+                if (input.isBlank()) {
+                    menuView.displayMessage("El nombre no puede estar vacío.");
+                    return; 
                 }
+                resultados = menuPrincipal.buscarPorNombre(input);
+                resultados.forEach(p -> menuView.displayMessage(p.fullDescription()));
             }
             case 3 -> {
                 input = menuView.getInput("Ingrese la descripción (o parte) a buscar: ");
-                resultados = menuPrincipal.buscarPorDescripcion(input);
-                if (resultados.isEmpty()) {
-                    menuView.displayMessage("No se encontraron productos con esa descripción.");
-                } else {
-                    resultados.forEach(p -> menuView.displayMessage(p.fullDescription()));
+                if(input.isBlank()) {
+                    menuView.displayMessage("La descripción no puede estar vacía.");
+                    return;
                 }
+                resultados = menuPrincipal.buscarPorDescripcion(input);
+                resultados.forEach(p -> menuView.displayMessage(p.fullDescription()));
             }
             default -> menuView.displayMessage("Opción de búsqueda no válida.");
         }
