@@ -9,6 +9,7 @@ public class Producto {
 
     /**
      * Constructor de la clase Producto.
+     * 
      * @param codigo      Código único del producto.
      * @param nombre      Nombre del producto.
      * @param descripcion Descripción del producto.
@@ -24,41 +25,57 @@ public class Producto {
     }
 
     // Getters y Setters
-    public String getCodigo() { return codigo; }
+    public String getCodigo() {
+        return codigo;
+    }
 
-    public String getNombre() { return nombre; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public String getDescripcion() { return descripcion; }
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-    public int getStock() { return stock; }
+    public int getStock() {
+        return stock;
+    }
 
-    public void setStock(int stock) { this.stock = stock; }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
-    public double getPrecio() { return precio; }
+    public double getPrecio() {
+        return precio;
+    }
 
-    public void setPrecio(double precio) { this.precio = precio; }
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
 
     /**
      * Muestra la descripción completa del producto.
      **/
-    public void fullDescription() {
-        System.out.println("-".repeat(30));
-        System.out.println("DETALLE DEL PRODUCTO");
-        System.out.println("-".repeat(30));
-        System.out.println("Código: " + this.getCodigo());
-        System.out.println("Nombre: " + this.getNombre());
-        System.out.println("Precio: $" + this.getPrecio());
-        System.out.println("Stock: " + this.getStock());
-        System.out.println("Descripción: " + this.getDescripcion());
-        System.out.println("-".repeat(30));
+    public String fullDescription() {
+        return "DETALLE DEL PRODUCTO\n" +
+                "Código: " + this.getCodigo() + "\n" +
+                "Nombre: " + this.getNombre() + "\n" +
+                "Precio: $" + this.getPrecio() + "\n" +
+                "Stock: " + this.getStock() + "\n" +
+                "Descripción: " + this.getDescripcion();
     }
 
     /**
      * Representación en cadena del producto.
+     * 
      * @return Una cadena que representa el producto.
      **/
     @Override

@@ -1,4 +1,4 @@
-# Requerimientos funcionales 
+# Requerimientos funcionales
 
 > Gestión de Inventario en Java V1
 

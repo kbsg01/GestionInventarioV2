@@ -11,14 +11,6 @@ import java.util.Scanner;
 public class ProductoView {
     private final Scanner scanner = new Scanner(System.in);
 
-    public void displayProductoMenu() {
-        System.out.println("=== MENÚ MODIFICACIÓN INVENTARIO ===");
-        System.out.println("1. Agregar producto");
-        System.out.println("2. Eliminar producto");
-        System.out.println("3. actualizar producto");
-        System.out.println("0. Volver al menú principal");
-    }
-
     public void displayMessage(String message) {
         System.out.println(message);
     }

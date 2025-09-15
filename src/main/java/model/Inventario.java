@@ -13,15 +13,18 @@ import java.util.List;
 public class Inventario {
     private HashMap<String, Producto> productos;
 
-    public Inventario() { this.productos = new HashMap<>(); }
+    public Inventario() {
+        this.productos = new HashMap<>();
+    }
 
     /**
      * Agrega un nuevo producto al inventario.
+     * 
      * @param producto El producto a agregar.
      **/
     public void addProducto(Producto producto) {
         try {
-            if(this.productos.containsKey(producto.getCodigo())) {
+            if (this.productos.containsKey(producto.getCodigo())) {
                 throw new IllegalArgumentException("Producto ya existe");
             }
             productos.put(producto.getCodigo(), producto);
@@ -31,7 +34,7 @@ public class Inventario {
     }
 
     public void updateProducto(Producto producto) {
-        if(!this.productos.containsKey(producto.getCodigo())) {
+        if (!this.productos.containsKey(producto.getCodigo())) {
             throw new IllegalArgumentException("Producto no existe");
         }
         productos.put(producto.getCodigo(), producto);
@@ -39,6 +42,7 @@ public class Inventario {
 
     /**
      * Elimina un producto del inventario basado en su código.
+     * 
      * @param codigo El código del producto a eliminar.
      */
     public void deleteProducto(String codigo) {
@@ -47,13 +51,17 @@ public class Inventario {
 
     /**
      * Busca un producto en el inventario basado en su código.
+     * 
      * @param codigo El código del producto a buscar.
      * @return El producto encontrado o null si no existe.
      **/
-    public Producto searchByCode(String codigo) { return productos.get(codigo); }
+    public Producto searchByCode(String codigo) {
+        return productos.get(codigo);
+    }
 
     /**
      * Busca productos en el inventario basado en su nombre (case insensitive).
+     * 
      * @param nombre El nombre del producto a buscar.
      * @return Lista de productos encontrados.
      **/
@@ -78,6 +86,7 @@ public class Inventario {
 
     /**
      * Busca productos en el inventario basado en su descripción.
+     * 
      * @param descripcion La descripción del producto a buscar.
      * @return resultados Lista de productos encontrados.
      **/
@@ -114,19 +123,20 @@ public class Inventario {
     /**
      * Genera un reporte del inventario, incluyendo el total de productos y el
      * stock, valor total del inventario.
+     * 
      * @return El reporte del inventario en formato String.
      */
     public String getReporteInventario() {
-        String reporte = "REPORTE DEL INVENTARIO\n";
-        reporte += "-".repeat(30) + "\n";
-        reporte += MessageFormat.format("Total de productos: {0}\n", totalProductos());
-        reporte += MessageFormat.format("Total de unidades en stock: {0}\n", totalUnidadesEnStock());
-        reporte += MessageFormat.format("Valor total del inventario: ${0}\n", valorTotalInventario());
-        reporte += "-".repeat(30) + "\n";
-        reporte += MessageFormat.format("ALERTA BAJO STOCK\n{0}\n", ((List<Producto>)productosConBajoStock(5)));
-        reporte += "-".repeat(30) + "\n";
-        reporte += MessageFormat.format("Fecha del reporte: {0}\n", java.time.LocalDate.now());
-        return reporte;
+
+        return "REPORTE DEL INVENTARIO\n" +
+                "-".repeat(30) + "\n" +
+                MessageFormat.format("Total de productos: {0}\n", totalProductos()) +
+                MessageFormat.format("Total de unidades en stock: {0}\n", totalUnidadesEnStock()) +
+                MessageFormat.format("Valor total del inventario: ${0}\n", valorTotalInventario()) +
+                "-".repeat(30) + "\n" +
+                MessageFormat.format("ALERTA BAJO STOCK\n{0}\n", ((List<Producto>) productosConBajoStock(5))) +
+                "-".repeat(30) + "\n" +
+                MessageFormat.format("Fecha del reporte: {0}\n", java.time.LocalDate.now());
     }
 
     /**
@@ -145,8 +155,9 @@ public class Inventario {
 
     /**
      * Lista los productos cuyo stock es menor o igual al umbral dado.
+     * 
      * @param umbral Valor máximo de stock para considerar un producto con bajo
-     * stock.
+     *               stock.
      **/
     public List<Producto> productosConBajoStock(int umbral) {
         List<Producto> bajoStock = new ArrayList<>();
@@ -160,6 +171,7 @@ public class Inventario {
 
     /**
      * Calcula el valor total del inventario.
+     * 
      * @return La suma del precio multiplicado por el stock de cada producto.
      **/
     public double valorTotalInventario() {

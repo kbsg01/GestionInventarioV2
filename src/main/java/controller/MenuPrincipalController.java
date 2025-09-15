@@ -1,107 +1,158 @@
 package controller;
-import view.InventarioView;
-import view.MenuPrincipalView;
-import view.ProductoView;
+
+import view.*;
+import model.MenuPrincipal;
+import model.Producto;
+
+import java.util.List;
 
 public class MenuPrincipalController {
     private final MenuPrincipalView menuView;
     private final ProductoView productoView;
-    private final InventarioView inventarioView;
+    private final MenuPrincipal menuPrincipal;
 
-    public MenuPrincipalController( MenuPrincipalView menuView, ProductoView productoView, InventarioView inventarioView) {
+    public MenuPrincipalController(MenuPrincipalView menuView, ProductoView productoView, MenuPrincipal menuPrincipal) {
         this.menuView = menuView;
         this.productoView = productoView;
-        this.inventarioView = inventarioView;
+        this.menuPrincipal = menuPrincipal;
     }
 
+    /**
+     * Inicia el menú principal y gestiona las opciones del usuario.
+    */
     public void run() {
         int opcion;
         do {
             menuView.displayMenu();
             opcion = menuView.getUserChoice();
             switch (opcion) {
-                case 1 -> mostrarMenuModificacion();
-                case 2 -> mostrarMenuBusquedaYListado();
-                case 3 -> inventarioView.generarReporteInventario();
+                case 1 -> agregarProducto();
+                case 2 -> actualizarProducto();
+                case 3 -> eliminarProducto();
+                case 4 -> listarProductos();
+                case 5 -> buscarProducto();
+                case 6 -> mostrarReporteInventario();
                 case 0 -> menuView.displayMessage("Saliendo...");
                 default -> menuView.displayMessage("Opción no válida.");
             }
         } while (opcion != 0);
     }
 
-    // Métodos para manejar cada opción del menú
-    private void mostrarMenuModificacion() {
-        int opcion;
-        do {
-            productoView.displayProductoMenu();
-            opcion = productoView.getUserChoice();
-            switch (opcion) {
-                case 1 -> agregarProducto();
-                case 2 -> eliminarProducto();
-                case 3 -> actualizarProducto();
-                case 0 -> menuView.displayMessage("Volviendo al menú principal...");
-                default -> menuView.displayMessage("Opción no válida.");
-            }
-        } while (opcion != 0);
-    }
-
-    private void mostrarMenuBusquedaYListado() {
-        int opcion;
-        do {
-            inventarioView.displayInventarioMenu();
-            opcion = inventarioView.getUserChoice();
-            switch (opcion) {
-                case 1 -> inventarioView.listarProductos();
-                case 2 -> inventarioView.generarReporteInventario();
-                case 3 -> inventarioView.buscarProductoPorCodigo();
-                case 4 -> inventarioView.buscarProductoPorNombre();
-                case 5 -> inventarioView.buscarProductoPorDescripcion();
-                case 0 -> menuView.displayMessage("Volviendo al menú principal...");
-                default -> menuView.displayMessage("Opción no válida.");
-            }
-        } while (opcion != 0);
-    }
-
+    /**
+     * Permite al usuario agregar un nuevo producto al inventario.
+    */
+    // RF1: Agregar producto
     private void agregarProducto() {
-        try {
-            model.Producto nuevo = productoView.crearProducto();
-            if (nuevo == null) {
-                menuView.displayMessage("No se creó el producto.");
-                return;
-            }
-            // verificar existencia por código
-            if (inventarioView.getInventario().searchByCode(nuevo.getCodigo()) != null) {
-                menuView.displayMessage("Ya existe un producto con ese código.");
-                return;
-            }
-            inventarioView.getInventario().addProducto(nuevo);
-            menuView.displayMessage("Producto agregado correctamente.");
-        } catch (Exception e) {
-            menuView.displayMessage("Error al agregar producto: " + e.getMessage());
+        Producto nuevo = productoView.crearProducto();
+        if (nuevo == null) {
+            menuView.displayMessage("No se creó el producto.");
+            return;
         }
+        // Verificar existencia usando el modelo
+        if (menuPrincipal.buscarPorId(nuevo.getCodigo()) != null) {
+            menuView.displayMessage("Ya existe un producto con ese código.");
+            return;
+        }
+        menuPrincipal.agregarProducto(nuevo);
+        menuView.displayMessage("Producto agregado correctamente.");
     }
 
+    /**
+     * Permite al usuario actualizar un producto existente.
+    */
+    // RF1: Actualizar producto
     private void actualizarProducto() {
-        System.out.println("* Al modificar un producto, si se deja algun campo vacio se mantiene el valor actual");
+        menuView.displayMessage("* Al modificar un producto, si se deja algún campo vacío se mantiene el valor actual");
         String codigo = productoView.obtenerCampoObligatorio("Código del producto a actualizar");
-        model.Producto existente = inventarioView.getInventario().searchByCode(codigo);
+        Producto existente = menuPrincipal.buscarPorId(codigo);
         if (existente == null) {
             menuView.displayMessage("No existe un producto con ese código.");
             return;
         }
         productoView.actualizarProducto(existente);
+        menuPrincipal.actualizarProducto(existente);
         menuView.displayMessage("Producto actualizado correctamente.");
     }
 
+    /**
+     * Permite al usuario eliminar un producto por su código.
+    */
+    // RF1: Eliminar producto
     private void eliminarProducto() {
         String codigo = productoView.obtenerCampoObligatorio("Código del producto a eliminar");
-        model.Producto existente = inventarioView.getInventario().searchByCode(codigo);
+        Producto existente = menuPrincipal.buscarPorId(codigo);
         if (existente == null) {
             menuView.displayMessage("No existe un producto con ese código.");
             return;
         }
-        inventarioView.getInventario().deleteProducto(codigo);
+        menuPrincipal.eliminarProducto(codigo);
         menuView.displayMessage("Producto eliminado correctamente.");
     }
 
+    /**
+     * Permite al usuario buscar productos por código, nombre o descripción.
+    */
+    // RF2: Método unificado para búsqueda
+    private void buscarProducto() {
+        menuView.displayMessage("Seleccione el campo de búsqueda:");
+        menuView.displayMessage("1. Buscar por código (ID)");
+        menuView.displayMessage("2. Buscar por nombre (parcial)");
+        menuView.displayMessage("3. Buscar por descripción (parcial)");
+        int opcion = menuView.getUserChoice();
+
+        String input;
+        List<Producto> resultados;
+
+        switch (opcion) {
+            case 1 -> {
+                input = menuView.getInput("Ingrese el código a buscar: ");
+                Producto producto = menuPrincipal.buscarPorId(input);
+                if (producto == null) {
+                    menuView.displayMessage("No se encontró el producto con ese código.");
+                } else {
+                    menuView.displayMessage(producto.fullDescription());
+                }
+            }
+            case 2 -> {
+                input = menuView.getInput("Ingrese el nombre (o parte) a buscar: ");
+                resultados = menuPrincipal.buscarPorNombre(input);
+                if (resultados.isEmpty()) {
+                    menuView.displayMessage("No se encontraron productos con ese nombre.");
+                } else {
+                    resultados.forEach(p -> menuView.displayMessage(p.fullDescription()));
+                }
+            }
+            case 3 -> {
+                input = menuView.getInput("Ingrese la descripción (o parte) a buscar: ");
+                resultados = menuPrincipal.buscarPorDescripcion(input);
+                if (resultados.isEmpty()) {
+                    menuView.displayMessage("No se encontraron productos con esa descripción.");
+                } else {
+                    resultados.forEach(p -> menuView.displayMessage(p.fullDescription()));
+                }
+            }
+            default -> menuView.displayMessage("Opción de búsqueda no válida.");
+        }
+    }
+
+    /**
+     * Muestra todos los productos en el inventario con detalles completos.
+     */
+    // RF3: Listar todos los productos
+    private void listarProductos() {
+        List<Producto> productos = menuPrincipal.listarProductos();
+        if (productos == null || productos.isEmpty()) {
+            menuView.displayMessage("No hay productos en el inventario.");
+        }
+        productos.forEach(p -> menuView.displayMessage(p.fullDescription()));
+    }
+
+    /**
+     * Muestra un resumen detallado de todos los productos en el inventario.
+     **/
+    // RF4: Mostrar reporte completo del inventario
+    private void mostrarReporteInventario() {
+        String reporte = menuPrincipal.reporteCompleto();
+        menuView.displayMessage(reporte);
+    }
 }

@@ -7,8 +7,8 @@ Permite agregar, eliminar, actualizar y listar productos en el inventario.
 
 ### Recursos adicionales
 
-- Link Miro: [Roadmap Gestión Inventario en Java](https://miro.com/app/board/uXjVJIIgWos=/?share_link_id=56281502077 )
-- Link Trello: [Trello Gestión Inventario en Java](https://trello.com/b/KFmbDkwP)
+- Link Miro: [Roadmap - Gestión Inventario en Java](https://miro.com/app/board/uXjVJIIgWos=/?share_link_id=56281502077 )
+- Link Trello: [Tablero - Gestión Inventario en Java](https://trello.com/b/KFmbDkwP)
 - [Requisitos funcionales/no funcionales entrega anterior](<Requerimientos Funcionales V1.md>)
 - Diagrama de clases:![Diagrama de clases UML](GestionInventarioV2.drawio.svg)
 
